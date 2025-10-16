@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: #506e4c;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -83,9 +83,8 @@
             transform: translate(-50%, -50%);
             text-align: center;
             font-size: 3.5em;
-            color: #fff;
+            color: #ffd6e8;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-            animation: rainbow 3s linear infinite;
             font-weight: bold;
             z-index: 10;
             white-space: nowrap;
@@ -111,8 +110,8 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
-            max-width: 900px;
-            height: 600px;
+            max-width: 1100px;
+            height: 700px;
         }
 
         .polaroid {
@@ -146,57 +145,57 @@
             font-size: 13px;
         }
 
-        /* Polaroid Positions - Kreis um die Mitte (nur 7 Bilder) */
+        /* Polaroid Positions - größerer Kreis */
         .polaroid:nth-child(1) {
-            top: 8%;
+            top: 5%;
             left: 50%;
             transform: translate(-50%, 0) rotate(-5deg);
         }
 
         .polaroid:nth-child(2) {
-            top: 25%;
-            right: 18%;
+            top: 20%;
+            right: 15%;
             transform: rotate(8deg);
         }
 
         .polaroid:nth-child(3) {
-            bottom: 25%;
-            right: 18%;
+            bottom: 20%;
+            right: 15%;
             transform: rotate(-7deg);
         }
 
         .polaroid:nth-child(4) {
-            bottom: 8%;
+            bottom: 5%;
             left: 50%;
             transform: translate(-50%, 0) rotate(6deg);
         }
 
         .polaroid:nth-child(5) {
-            bottom: 25%;
-            left: 18%;
+            bottom: 20%;
+            left: 15%;
             transform: rotate(-8deg);
         }
 
         .polaroid:nth-child(6) {
             top: 50%;
-            left: 8%;
+            left: 5%;
             transform: translateY(-50%) rotate(5deg);
         }
 
         .polaroid:nth-child(7) {
-            top: 25%;
-            left: 18%;
+            top: 20%;
+            left: 15%;
             transform: rotate(-4deg);
         }
 
-        /* Confetti - langsamer & startet oben */
+        /* Confetti - noch langsamer */
         .confetti {
             position: fixed;
             width: 10px;
             height: 10px;
             background: #f0f;
             top: -20px;
-            animation: confetti-fall 6s linear;
+            animation: confetti-fall 8s linear;
             pointer-events: none;
         }
 
@@ -389,13 +388,13 @@
 
     <!-- Hidden Audio Element -->
     <audio id="birthdayMusic" loop preload="auto">
-        <source src="music/Kopf-im-Himmel.mp3" type="audio/mpeg">
+        <source src="music/birthday-music.mp3" type="audio/mpeg">
     </audio>
 
     <script>
         // WICHTIG: Setze hier das Geburtsdatum ein (Format: Jahr, Monat-1, Tag, Stunde, Minute)
         // Beispiel: 27. Oktober 2025, 00:00 Uhr
-        const birthdayDate = new Date(2025, 9, 16, 10, 11, 0).getTime();
+        const birthdayDate = new Date(2025, 9, 16, 10, 23, 0).getTime();
 
         const countdownSection = document.getElementById('countdownSection');
         const birthdaySection = document.getElementById('birthdaySection');
@@ -433,8 +432,8 @@
                 });
                 musicPlaying = true;
                 
-                // Herzen Animation - alle 5 Sekunden
-                setInterval(createHeart, 5000);
+                // Herzen Animation - alle 10 Sekunden, nur sporadisch
+                setInterval(createHeart, 10000);
                 
                 return;
             }
@@ -455,19 +454,19 @@
         function createConfetti() {
             const colors = ['#ff6b6b', '#ffd93d', '#6bcf7f', '#4d96ff', '#ff8fab', '#c5a3ff'];
             
-            // Weniger Konfetti (80 statt 100)
-            for (let i = 0; i < 80; i++) {
+            // Weniger Konfetti (60 statt 80)
+            for (let i = 0; i < 60; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
                     confetti.style.left = Math.random() * 100 + '%';
                     confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
                     document.body.appendChild(confetti);
 
-                    // Konfetti bleibt 6 Sekunden
-                    setTimeout(() => confetti.remove(), 6000);
-                }, i * 60);
+                    // Konfetti bleibt 8 Sekunden
+                    setTimeout(() => confetti.remove(), 8000);
+                }, i * 80);
             }
         }
 
@@ -476,11 +475,12 @@
             heart.className = 'heart';
             heart.innerHTML = ['💛', '💕', '🧡', '💗', '💝', '💚'][Math.floor(Math.random() * 6)];
             heart.style.left = Math.random() * 100 + '%';
-            heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
+            heart.style.fontSize = (Math.random() * 12 + 18) + 'px';
+            heart.style.bottom = '0';
             document.body.appendChild(heart);
 
-            // Herzen bleiben 6 Sekunden (statt 4)
-            setTimeout(() => heart.remove(), 6000);
+            // Herzen bleiben 8 Sekunden
+            setTimeout(() => heart.remove(), 8000);
         }
 
         // Update countdown jede Sekunde
