@@ -188,14 +188,14 @@
             transform: rotate(-4deg);
         }
 
-        /* Confetti - noch langsamer */
+        /* Confetti - sehr langsam */
         .confetti {
             position: fixed;
             width: 10px;
             height: 10px;
             background: #f0f;
             top: -20px;
-            animation: confetti-fall 8s linear;
+            animation: confetti-fall 10s linear;
             pointer-events: none;
         }
 
@@ -225,25 +225,7 @@
             transform: scale(1.1);
         }
 
-        /* Hearts Animation - langsamer & weniger häufig */
-        .heart {
-            position: fixed;
-            font-size: 25px;
-            animation: float-hearts 6s ease-in forwards;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        @keyframes float-hearts {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(180deg);
-                opacity: 0;
-            }
-        }
+        /* Hearts Animation - ENTFERNT */
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -394,7 +376,7 @@
     <script>
         // WICHTIG: Setze hier das Geburtsdatum ein (Format: Jahr, Monat-1, Tag, Stunde, Minute)
         // Beispiel: 27. Oktober 2025, 00:00 Uhr
-        const birthdayDate = new Date(2025, 9, 16, 10, 23, 0).getTime();
+        const birthdayDate = new Date(2025, 9, 16, 10, 33, 0).getTime();
 
         const countdownSection = document.getElementById('countdownSection');
         const birthdaySection = document.getElementById('birthdaySection');
