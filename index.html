@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Tanja! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Countdown Container */
+        .countdown-container {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .countdown-title {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px 30px;
+            border-radius: 15px;
+            min-width: 100px;
+        }
+
+        .time-number {
+            font-size: 3em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Birthday Container */
+        .birthday-container {
+            display: none;
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .birthday-title {
+            text-align: center;
+            font-size: 4em;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 80px;
+            animation: rainbow 3s linear infinite;
+            font-weight: bold;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff6b6b; }
+            25% { color: #ffd93d; }
+            50% { color: #6bcf7f; }
+            75% { color: #4d96ff; }
+            100% { color: #ff6b6b; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Polaroids Container */
+        .polaroids-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin-top: 50px;
+        }
+
+        .polaroid {
+            position: absolute;
+            width: 200px;
+            background: white;
+            padding: 15px 15px 60px 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .polaroid-caption {
+            text-align: center;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* Polaroid Positions (kreisförmig um die Mitte) */
+        .polaroid:nth-child(1) {
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0) rotate(-8deg);
+            animation-delay: 0s;
+        }
+
+        .polaroid:nth-child(2) {
+            top: 15%;
+            right: 10%;
+            transform: rotate(12deg);
+            animation-delay: 0.3s;
+        }
+
+        .polaroid:nth-child(3) {
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%) rotate(5deg);
+            animation-delay: 0.6s;
+        }
+
+        .polaroid:nth-child(4) {
+            bottom: 10%;
+            right: 15%;
+            transform: rotate(-10deg);
+            animation-delay: 0.9s;
+        }
+
+        .polaroid:nth-child(5) {
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0) rotate(7deg);
+            animation-delay: 1.2s;
+        }
+
+        .polaroid:nth-child(6) {
+            bottom: 10%;
+            left: 15%;
+            transform: rotate(-12deg);
+            animation-delay: 1.5s;
+        }
+
+        .polaroid:nth-child(7) {
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%) rotate(8deg);
+            animation-delay: 1.8s;
+        }
+
+        .polaroid:nth-child(8) {
+            top: 15%;
+            left: 10%;
+            transform: rotate(-5deg);
+            animation-delay: 2.1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            font-size: 1.2em;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hearts Animation */
+        .heart {
+            position: fixed;
+            font-size: 30px;
+            animation: float-hearts 4s ease-in forwards;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes float-hearts {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .birthday-title {
+                font-size: 2.5em;
+                margin-bottom: 50px;
+            }
+
+            .polaroids-container {
+                height: 500px;
+            }
+
+            .polaroid {
+                width: 150px;
+                padding: 10px 10px 40px 10px;
+            }
+
+            .polaroid img {
+                height: 150px;
+            }
+
+            .countdown-title {
+                font-size: 2em;
+            }
+
+            .time-number {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Countdown Section -->
+    <div class="countdown-container" id="countdownSection">
+        <h1 class="countdown-title">Countdown zu Tanjas Geburtstag 🎂</h1>
+        <div class="countdown-timer" id="countdown">
+            <div class="time-box">
+                <span class="time-number" id="days">00</span>
+                <span class="time-label">Tage</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="hours">00</span>
+                <span class="time-label">Stunden</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="minutes">00</span>
+                <span class="time-label">Minuten</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="seconds">00</span>
+                <span class="time-label">Sekunden</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Birthday Section (versteckt bis Geburtstag) -->
+    <div class="birthday-container" id="birthdaySection">
+        <h1 class="birthday-title">Happy Birthday Tanja! 🎉</h1>
+        
+        <div class="polaroids-container">
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Erinnerung 1">
+                <p class="polaroid-caption">Unsere erste Zeit ❤️</p>
+            </div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=400" alt="Erinnerung 2">
+                <p class="polaroid-caption">Zusammen lachen 😄</p>
+            </div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400" alt="Erinnerung 3">
+                <p class="polaroid-caption">Abenteuer erleben 🌟</p>
+            </div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Erinnerung 4">
+                <p class="polaroid-caption">Magische Momente ✨</p>
+            </div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=400" alt="Erinnerung 5">
+                <p class="polaroid-caption">Gemeinsam stark 💪</p>
+            </div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400" alt="Erinnerung 6">
+                <p class="polaroid-caption">Einfach wir 💕</p>
+            </div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Erinnerung 7">
+                <p class="polaroid-caption">Unvergesslich 🌈</p>
+            </div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=400" alt="Erinnerung 8">
+                <p class="polaroid-caption">Für immer 💖</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl" onclick="toggleMusic()">
+        🎵 Musik
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="birthdayMusic" loop>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // WICHTIG: Setze hier das Geburtsdatum ein (Format: Jahr, Monat-1, Tag, Stunde, Minute)
+        // Beispiel: 27. Oktober 2025, 00:00 Uhr
+        const birthdayDate = new Date(2025, 9, 27, 0, 0, 0).getTime();
+
+        const countdownSection = document.getElementById('countdownSection');
+        const birthdaySection = document.getElementById('birthdaySection');
+        const music = document.getElementById('birthdayMusic');
+
+        let musicPlaying = false;
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                music.pause();
+                musicPlaying = false;
+            } else {
+                music.play();
+                musicPlaying = true;
+            }
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+
+            if (distance < 0) {
+                // Geburtstag ist da!
+                countdownSection.style.display = 'none';
+                birthdaySection.style.display = 'block';
+                
+                // Konfetti starten
+                createConfetti();
+                
+                // Musik automatisch starten
+                music.play();
+                musicPlaying = true;
+                
+                // Herzen Animation
+                setInterval(createHeart, 800);
+                
+                return;
+            }
+
+            // Berechne Zeit
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update Display
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#ffd93d', '#6bcf7f', '#4d96ff', '#ff8fab', '#c5a3ff'];
+            
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        // Update countdown jede Sekunde
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
